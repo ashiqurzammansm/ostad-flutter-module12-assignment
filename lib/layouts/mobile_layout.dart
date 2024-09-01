@@ -26,6 +26,17 @@ class MobileLayout extends StatelessWidget {
             ),
             const SizedBox(height: 20),
             ElevatedButton(
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.resolveWith<Color>(
+                      (Set<MaterialState> states) {
+                    if (states.contains(MaterialState.hovered)) {
+                      return Colors.teal[600]!;
+                    }
+                    return const Color(0xFF44E09E); // Default color
+                  },
+                ),
+                foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+              ),
               onPressed: () {
                 ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(content: Text('Course Joining Not Implemented')),

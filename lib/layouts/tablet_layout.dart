@@ -44,6 +44,17 @@ class TabletLayout extends StatelessWidget {
             ),
             const SizedBox(height: 20),
             ElevatedButton(
+              style: ButtonStyle(
+                backgroundColor: WidgetStateProperty.resolveWith<Color>(
+                      (Set<WidgetState> states) {
+                    if (states.contains(WidgetState.hovered)) {
+                      return Colors.teal[600]!;
+                    }
+                    return const Color(0xFF44E09E); // Default color
+                  },
+                ),
+                foregroundColor: WidgetStateProperty.all<Color>(Colors.white),
+              ),
               onPressed: () {
                 ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(content: Text('Course Joining Not Implemented')),

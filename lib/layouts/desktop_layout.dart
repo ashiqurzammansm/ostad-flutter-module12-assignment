@@ -43,17 +43,41 @@ class DesktopLayout extends StatelessWidget {
               style: TextStyle(fontSize: 18),
             ),
             const SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Course Joining Not Implemented')),
-                );
-              },
-              child: const Text('Join Course'),
+            MouseRegion(
+              cursor: SystemMouseCursors.click,
+              onEnter: (event) => _onButtonHover(context, true),
+              onExit: (event) => _onButtonHover(context, false),
+              child: ElevatedButton(
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.resolveWith<Color>(
+                        (Set<MaterialState> states) {
+                      if (states.contains(MaterialState.hovered)) {
+                        return Colors.teal[600]!;
+                      }
+                      return const Color(0xFF44E09E); // Default color
+                    },
+                  ),
+                  foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+                ),
+                onPressed: () {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('Course Joining Not Implemented')),
+                  );
+                },
+                child: const Text('Join Course'),
+              ),
             ),
           ],
         ),
       ),
     );
+  }
+
+  void _onButtonHover(BuildContext context, bool isHovered) {
+    final snackBar = isHovered
+        ? const SnackBar(content: Text('Button Hovered'), duration: Duration(milliseconds: 300))
+        : const SnackBar(content: Text('Button Hover Exit'), duration: Duration(milliseconds: 300));
+
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 }
