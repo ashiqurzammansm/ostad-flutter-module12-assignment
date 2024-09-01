@@ -13,9 +13,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       title: 'Flutter Web',
-      home: ResponsiveLayout(
+      debugShowCheckedModeBanner: false,  // Disable the debug banner
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: const ResponsiveLayout(
         desktop: DesktopLayout(),
         tablet: TabletLayout(),
         mobile: MobileLayout(),
