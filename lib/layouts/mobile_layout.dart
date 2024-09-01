@@ -7,6 +7,7 @@ class MobileLayout extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.blue,
         title: const Text('Flutter Web - Mobile'),
       ),
       body: Center(
@@ -27,15 +28,15 @@ class MobileLayout extends StatelessWidget {
             const SizedBox(height: 20),
             ElevatedButton(
               style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.resolveWith<Color>(
-                      (Set<MaterialState> states) {
-                    if (states.contains(MaterialState.hovered)) {
+                backgroundColor: WidgetStateProperty.resolveWith<Color>(
+                      (Set<WidgetState> states) {
+                    if (states.contains(WidgetState.hovered)) {
                       return Colors.teal[600]!;
                     }
                     return const Color(0xFF44E09E); // Default color
                   },
                 ),
-                foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+                foregroundColor: WidgetStateProperty.all<Color>(Colors.white),
               ),
               onPressed: () {
                 ScaffoldMessenger.of(context).showSnackBar(
@@ -55,7 +56,20 @@ class MobileLayout extends StatelessWidget {
               decoration: BoxDecoration(
                 color: Colors.blue,
               ),
-              child: Text('Menu'),
+              child: Column(
+                children: [
+                  // Add a small profile image here
+                  CircleAvatar(
+                    radius: 30,
+                    backgroundImage: AssetImage('assets/profile.jpg'), // Update the image path accordingly
+                  ),
+                  SizedBox(height: 10),
+                  Text(
+                    'User Name',
+                    style: TextStyle(color: Colors.white, fontSize: 18),
+                  ),
+                ],
+              ),
             ),
             ListTile(
               leading: const Icon(Icons.home),
@@ -64,7 +78,7 @@ class MobileLayout extends StatelessWidget {
             ),
             ListTile(
               leading: const Icon(Icons.book),
-              title: const Text('Courses'),
+              title: const Text('Course'),
               onTap: () {},
             ),
             ListTile(
